@@ -5,3 +5,4 @@ Login with Facebook/Google
 * `git clone`
 * `npm i`
 * `npm start`
+* `react-native run-android`
