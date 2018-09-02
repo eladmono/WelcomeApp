@@ -84,11 +84,10 @@ class Home extends Component {
 
   renderButtons() {
     const {isLoggedIn, loggedInPlatform} = this.state;
-    const {buttonsContainer} = styles;
-    let buttons = null;
+    const {buttonsContainer, logoutButton} = styles;
 
     if (!isLoggedIn) {
-      buttons =
+      return (
         <View style={buttonsContainer}>
           <LoginButton
             publishPermissions={["publish_actions"]}
@@ -118,8 +117,9 @@ class Home extends Component {
             onPress={() => this.googleSignIn()}
           />
         </View>
+      )
     } else if (isLoggedIn && loggedInPlatform === 'Facebook') {
-      buttons =
+      return (
         <View style={buttonsContainer}>
           <LoginButton
             publishPermissions={["publish_actions"]}
@@ -142,15 +142,16 @@ class Home extends Component {
           }
             onLogoutFinished={() => this.logoutUser()}/>
         </View>
+      )
     } else {
-      buttons =
+      return (
         <View style={buttonsContainer}>
-          <TouchableOpacity onPress={() => this.logoutUser()}>
+          <TouchableOpacity onPress={() => this.logoutUser()} style={logoutButton}>
             <Text>Logout</Text>
           </TouchableOpacity>
         </View>
+      )
     }
-    return buttons;
   }
 
   render() {
@@ -204,6 +205,14 @@ const styles = StyleSheet.create({
     padding: 15,
     justifyContent: 'center',
     alignItems: 'center'
+  },
+  logoutButton: {
+    justifyContent: 'center',
+    backgroundColor: 'red',
+    padding: 20,
+    borderRadius: 20,
+    borderWidth: 1,
+    height: 30
   }
 
 });
